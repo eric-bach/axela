@@ -1,5 +1,8 @@
 #### TODOs
 
+- Update POST for Travel APIs
+- Move Reward APIs to separate agent group
+
 #### Reference
 
 - [Bedrock Documentation](https://docs.aws.amazon.com/bedrock/latest/userguide/agents.html)

@@ -13,7 +13,7 @@
         "operationId": "getMemberInfo",
         "parameters": [
           {
-            "name": "MemberNumber",
+            "name": "memberNumber",
             "in": "path",
             "description": "Member Number",
             "required": true,
@@ -34,27 +34,7 @@
                     "properties": {
                       "id": {
                         "type": "int",
-                        "description": "This is the Member ID used to place the order"
-                      },
-                      "addressLine1": {
-                        "type": "string",
-                        "description": "Member billing address line 1"
-                      },
-                      "addressLine2": {
-                        "type": "string",
-                        "description": "Member billing address line 2"
-                      },
-                      "city": {
-                        "type": "string",
-                        "description": "Member billing city"
-                      },
-                      "province": {
-                        "type": "string",
-                        "description": "Member billing state"
-                      },
-                      "postalCode": {
-                        "type": "string",
-                        "description": "Member billing postal code"
+                        "description": "This is the member's Id"
                       },
                       "firstName": {
                         "type": "string",
@@ -63,6 +43,26 @@
                       "lastName": {
                         "type": "string",
                         "description": "Member last name"
+                      },
+                      "addressLine1": {
+                        "type": "string",
+                        "description": "Member address line 1"
+                      },
+                      "addressLine2": {
+                        "type": "string",
+                        "description": "Member address line 2"
+                      },
+                      "city": {
+                        "type": "string",
+                        "description": "Member departure city"
+                      },
+                      "province": {
+                        "type": "string",
+                        "description": "Member state"
+                      },
+                      "postalCode": {
+                        "type": "string",
+                        "description": "Member postal code"
                       }
                     }
                   }
@@ -80,7 +80,7 @@
         "operationId": "getRewardBalance",
         "parameters": [
           {
-            "name": "MemberId",
+            "name": "memberId",
             "in": "query",
             "description": "Member Id",
             "required": true,
@@ -100,6 +100,60 @@
                     "memberId": {
                       "type": "int",
                       "description": "Member Id"
+                    },
+                    "balance": {
+                      "type": "decimal",
+                      "description": "Member reward dollar balance"
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/rewards/redeem": {
+      "post": {
+        "summary": "Sub task to redeem a member's reward dollars",
+        "description": "Once we have the member Id, we can redeem the reward dollars for the member",
+        "operationId": "redeemRewardDollars",
+        "requestBody": {
+          "description": "Member Id",
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "memberId": {
+                    "type": "int",
+                    "description": "Member Id"
+                  },
+                  "amount": {
+                    "type": "decimal",
+                    "description": "Amount to redeem"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Redeem reqward dollars for the member",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "memberId": {
+                      "type": "int",
+                      "description": "Member Id"
+                    },
+                    "redeemed": {
+                      "type": "decimal",
+                      "description": "Reward dollars redeemed"
                     },
                     "balance": {
                       "type": "decimal",
